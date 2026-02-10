@@ -1,0 +1,11 @@
+{{#each models}}
+import {{pascalCase this}} from '@models/{{this}}';
+{{/each}}
+
+export default abstract class {{pascalCase name}}Adapter {
+    {{#each (split methods ",")}}
+    {{#with (parseMethod this)}}
+    abstract {{name}}({{params}}): {{{returnType}}};
+    {{/with}}
+    {{/each}}
+}

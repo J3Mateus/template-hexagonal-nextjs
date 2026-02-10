@@ -1,0 +1,13 @@
+{{#each models}}
+import {{pascalCase this}} from '@models/{{this}}';
+{{/each}}
+
+export default abstract class {{pascalCase name}}UseCase {
+    {{#each (split methods ",")}}
+    {{#with (parseMethod this)}}
+    {{name}}({{params}}): {{{returnType}}} {
+        throw new Error('Method "{{name}}" not implemented');
+    }
+    {{/with}}
+    {{/each}}
+}

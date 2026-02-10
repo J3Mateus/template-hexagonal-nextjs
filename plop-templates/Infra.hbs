@@ -1,0 +1,17 @@
+import {{pascalCase name}}Adapter from "@interfaces/adapters/{{camelCase name}}Adapter";
+import BaseAPI from "../index";
+{{#each models}}
+import {{pascalCase this}} from '@models/{{this}}';
+{{/each}}
+
+class {{pascalCase name}}API extends BaseAPI implements {{pascalCase name}}Adapter {
+    {{#each (split methods ",")}}
+    {{#with (parseMethod this)}}
+    async {{name}}({{params}}): {{{returnType}}} {
+        throw new Error('Method "{{name}}" not implemented');
+    }
+    {{/with}}
+    {{/each}}
+}
+
+export default {{pascalCase name}}API;

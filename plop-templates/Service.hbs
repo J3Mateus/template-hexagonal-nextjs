@@ -1,0 +1,19 @@
+import {{pascalCase name}}Adapter from '@interfaces/adapters/{{camelCase name}}Adapter';
+import {{pascalCase name}}UseCase from '@interfaces/usecases/{{camelCase name}}UseCase';
+{{#each models}}
+import {{pascalCase this}} from '@models/{{this}}';
+{{/each}}
+
+class {{pascalCase name}}Service implements {{pascalCase name}}UseCase {
+    constructor(protected readonly adapter: {{pascalCase name}}Adapter) { }
+
+    {{#each (split methods ",")}}
+    {{#with (parseMethod this)}}
+    async {{name}}({{params}}): {{{returnType}}} {
+        throw new Error('Method "{{name}}" not implemented');
+    }
+    {{/with}}
+    {{/each}}
+}
+
+export default {{pascalCase name}}Service;
